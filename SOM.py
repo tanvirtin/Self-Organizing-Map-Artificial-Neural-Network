@@ -16,6 +16,7 @@ class SOM(object):
 		self.mapSize = mapSize
 		self.dimension = dimension
 
+	# initializes the weight matrix
 	def initWeights(self, n, d):
 		table = []
 		# number of rows times
@@ -30,9 +31,12 @@ class SOM(object):
 
 		return np.array(table)
 
+	# a getter which returns the weight matrix
 	def getWeights(self):
 		return self.weights
 
+	# trains the weight by updating on each iteration
+	# the inputData needs to be the entire dataset and timestep is the number of iteration that the training is on
 	def train(self, inputData, timeStep):
 		# compute the best matching unit for that node
 		bmu = self.BMU(inputData[timeStep])
@@ -49,6 +53,7 @@ class SOM(object):
 
 		lRadius = self.learningRadius(timeStep, distance)
 
+		# the weight now is updated
 		self.weights += lRatio * lRadius * (inputData[timeStep] - self.weights)
 
 
