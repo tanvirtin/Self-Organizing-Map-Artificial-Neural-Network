@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from tqdm import tqdm
 import random
 import copy
 import math
@@ -85,22 +83,3 @@ class SOM(object):
 
 	def learningRadius(self, iterationNum, distance):
 		return np.exp(-distance**2 / (2 * math.pow((float(self.mapSize / 2) * math.exp((1 - iterationNum) / float(self.numData / 4))), 2)))
-
-def main():
-	randomPixels = np.random.rand(1000,3)
-
-	som = SOM(20, 1000, 3, 0.1)
-
-	plt.imshow(som.getWeights(), interpolation='none')
-	plt.savefig("init.png")
-
-	for i in tqdm(range(1000)):
-		som.train(teachers, i)
-
-	plt.imshow(som.getWeights(), interpolation='none')
-	plt.savefig("final.png")
-
-
-
-if __name__ == "__main__":
-	main()
