@@ -9,13 +9,13 @@ def main():
 	som = SOM(20, 1000, 3, 0.1)
 
 	plt.imshow(som.getWeights(), interpolation='none')
-	plt.savefig("init.png")
+	plt.savefig("initialImage.png")
 
 	for i in tqdm(range(1000)):
 		som.train(randomPixels, i)
 
 	plt.imshow(som.getWeights(), interpolation='none')
-	plt.savefig("final.png")
+	plt.savefig("finalImage.png")
 
 
 
