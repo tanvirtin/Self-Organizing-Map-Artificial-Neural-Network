@@ -2,13 +2,16 @@ import numpy as np
 import random
 import copy
 import math
+import matplotlib.pyplot as plt
 
 # because 42 is the answer to life, the universe
 np.random.seed(42)
 
 class SOM(object):
+	# mapSize is the grid size
 	# numData is the number of data to be organized
 	# dimension is the number of dimensions the data has, which can be pixel dimensions
+	# epsilon is the learning rate
 	def __init__(self, mapSize, numData, dimension, epsilon):
 		self.weights = self.initWeights(mapSize, dimension)
 		self.learningRate = epsilon
@@ -63,7 +66,7 @@ class SOM(object):
 		# convert the inputData to numpy array so that we can use numpy methods on it
 		inputData = np.array(inputData)
 
-		# to make shallow copy and avoid the same variable pointing to the same variable
+		# to make shallow copy and avoid the same variable pointing to the same memory address
 		bmu = copy.copy(self.weights)
 
 		# following the formula for euclidian distance
@@ -88,3 +91,13 @@ class SOM(object):
 
 	def learningRadius(self, iterationNum, distance):
 		return np.exp(-distance**2 / (2 * math.pow((float(self.mapSize / 2) * math.exp((1 - iterationNum) / float(self.numData / 4))), 2)))
+
+	def getPlottingData(self):
+		table = []
+		reshapeSize = int(np.sqrt(len(self.weights[0][0])))
+		for i in range(self.mapSize):
+			row = []
+			for j in range(self.mapSize):
+				row.append(self.weights[i][j].reshape((reshapeSize, reshapeSize)))
+			table.append(row)
+		return table
