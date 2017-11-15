@@ -5,11 +5,13 @@ from tqdm import tqdm
 from filteredMnist import filteredMnist
 
 
-def displayImages(gridSize, gridData):
+def displayImages(gridSize, gridData, imageName, show = True):
 	row = 0
 	col = 0
 
 	for i in range(1, gridSize * gridSize + 1):
+		# plt.subplot can fit gridSize * gridSize number of data
+		# which is what i will b
 		plt.subplot(gridSize, gridSize, i)
 		fig = plt.imshow(gridData[row][col])
 		fig.axes.get_xaxis().set_visible(False)
@@ -25,7 +27,10 @@ def displayImages(gridSize, gridData):
 			# when we hit maximum gridSize we know we go down the y axis
 			if (row == gridSize):
 				row = 0
-	plt.show()
+	if show:
+		plt.show()
+
+	plt.savefig(imageName)
 
 
 def main():
@@ -38,10 +43,12 @@ def main():
 
 	som = SOM(gridSize, trainingDataSize, trainingDataDimension, epsilon)
 
+	displayImages(gridSize, som.getPlottingData(), "init.png", False)
+
 	for i in tqdm(range(len(images))):
 		som.train(images, i)
 
-	displayImages(gridSize, som.getPlottingData())
+	displayImages(gridSize, som.getPlottingData(), "final.png")
 
 
 if __name__ == "__main__":
