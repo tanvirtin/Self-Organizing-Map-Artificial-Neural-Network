@@ -5,7 +5,8 @@ from tqdm import tqdm
 from filteredMnist import filteredMnist
 
 
-def displayImages(gridSize, gridData, imageName, show = True):
+def displayImages(gridSize, gridData, imageName):
+	plt.close()
 	row = 0
 	col = 0
 
@@ -27,8 +28,6 @@ def displayImages(gridSize, gridData, imageName, show = True):
 			# when we hit maximum gridSize we know we go down the y axis
 			if (row == gridSize):
 				row = 0
-	if show:
-		plt.show()
 
 	plt.savefig(imageName)
 
@@ -43,7 +42,7 @@ def main():
 
 	som = SOM(gridSize, trainingDataSize, trainingDataDimension, epsilon)
 
-	displayImages(gridSize, som.getPlottingData(), "init.png", False)
+	displayImages(gridSize, som.getPlottingData(), "init.png")
 
 	for i in tqdm(range(len(images))):
 		som.train(images, i)
