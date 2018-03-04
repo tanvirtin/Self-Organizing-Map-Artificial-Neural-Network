@@ -1,4 +1,4 @@
-from SOM import SOM
+from som import SOM
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
