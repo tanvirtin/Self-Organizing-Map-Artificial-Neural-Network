@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # because 42 is the answer to life, the universe
 np.random.seed(42)
 
-class SOM(object):
+class SelfOrganizingMap(object):
 	# mapSize is the grid size
 	# numData is the number of data to be organized
 	# dimension is the number of dimensions the data has, which can be pixel dimensions

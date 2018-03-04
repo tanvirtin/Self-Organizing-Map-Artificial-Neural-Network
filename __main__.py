@@ -1,4 +1,4 @@
-from som import SOM
+from som import SelfOrganizingMap
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
@@ -40,7 +40,7 @@ def main():
 	trainingDataSize = len(images)
 	trainingDataDimension = len(images[0])
 
-	som = SOM(gridSize, trainingDataSize, trainingDataDimension, epsilon)
+	som = SelfOrganizingMap(gridSize, trainingDataSize, trainingDataDimension, epsilon)
 
 	displayImages(gridSize, som.getPlottingData(), "init.png")
 
